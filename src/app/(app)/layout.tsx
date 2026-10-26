@@ -1,23 +1,15 @@
-import Link from "next/link";
-import { signOut } from "@/app/login/actions";
-import { Logo } from "@/components/ui";
+import { AppShell } from "@/components/shell/app-shell";
+import { PLANS, planOf } from "@/lib/plans";
+import { createClient } from "@/lib/supabase/server";
 
-export default function AppLayout({ children }: { children: React.ReactNode }) {
+export default async function AppLayout({ children }: { children: React.ReactNode }) {
+  const supabase = await createClient();
+  const { data } = await supabase.auth.getUser();
+  const email = data.user?.email ?? "";
+
   return (
-    <div className="min-h-dvh">
-      <nav className="border-b border-line print:hidden">
-        <div className="mx-auto flex h-14 max-w-5xl items-center justify-between px-5">
-          <div className="flex items-center gap-6">
-            <Logo href="/dashboard" />
-            <Link href="/dashboard" className="text-sm text-muted transition hover:text-fg">Testes</Link>
-            <Link href="/plans" className="text-sm text-muted transition hover:text-fg">Planos</Link>
-          </div>
-          <form action={signOut}>
-            <button className="text-sm text-muted transition hover:text-fg">Sair</button>
-          </form>
-        </div>
-      </nav>
-      <main className="mx-auto max-w-5xl px-5 py-10">{children}</main>
-    </div>
+    <AppShell user={{ name: email.split("@")[0] || "Você", email, plan: PLANS[planOf()].name }}>
+      {children}
+    </AppShell>
   );
 }

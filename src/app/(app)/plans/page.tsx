@@ -1,16 +1,16 @@
+import { PageHeader } from "@/components/shell/page-header";
 import { PLANS, planOf } from "@/lib/plans";
 
 export default function PlansPage() {
   const current = planOf();
   return (
     <div>
-      <h1 className="text-3xl font-semibold tracking-tight">Planos</h1>
-      <p className="mt-2 text-muted">Cobrança por testes no mês.</p>
-      <div className="mt-8 grid gap-4 sm:grid-cols-2">
+      <PageHeader title="Planos" actions={false} />
+      <div className="grid gap-4 sm:grid-cols-2">
         {(Object.entries(PLANS) as [keyof typeof PLANS, (typeof PLANS)[keyof typeof PLANS]][]).map(([id, p]) => (
           <div
             key={id}
-            className={`rounded-2xl border p-6 ${id === "pro" ? "border-accent/40 bg-accent-dim" : "border-line bg-surface"}`}
+            className={`glass p-6 ${id === "pro" ? "!border-accent/40" : ""}`}
           >
             <h2 className="font-semibold">{p.name}</h2>
             <p className="mt-3 text-4xl font-semibold">
