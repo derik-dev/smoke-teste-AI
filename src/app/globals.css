@@ -1,0 +1,66 @@
+@import "tailwindcss";
+
+@theme {
+  --color-bg: #0a0a0b;
+  --color-surface: #111113;
+  --color-surface-2: #17171a;
+  --color-line: #232327;
+  --color-fg: #f4f4f5;
+  --color-muted: #8b8b94;
+  --color-accent: #34d399;
+  --color-accent-dim: #10b98126;
+  --color-danger: #f87171;
+  --color-warn: #fbbf24;
+  --font-sans: var(--font-geist-sans), ui-sans-serif, system-ui, sans-serif;
+  --font-mono: var(--font-geist-mono), ui-monospace, monospace;
+}
+
+html {
+  color-scheme: dark;
+}
+
+body {
+  background: var(--color-bg);
+  color: var(--color-fg);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+}
+
+::selection {
+  background: #34d39940;
+}
+
+.glow {
+  background:
+    radial-gradient(60% 50% at 50% 0%, #34d39922 0%, transparent 70%),
+    radial-gradient(40% 40% at 85% 10%, #6366f11a 0%, transparent 70%);
+}
+
+.grid-bg {
+  background-image:
+    linear-gradient(to right, #ffffff08 1px, transparent 1px),
+    linear-gradient(to bottom, #ffffff08 1px, transparent 1px);
+  background-size: 48px 48px;
+  mask-image: radial-gradient(ellipse 70% 60% at 50% 0%, #000 30%, transparent 75%);
+}
+
+@media print {
+  body {
+    background: #fff;
+    color: #111;
+  }
+  .glow,
+  .grid-bg {
+    display: none;
+  }
+  * {
+    border-color: #ddd !important;
+    --color-surface: #fff;
+    --color-surface-2: #f5f5f5;
+    --color-fg: #111;
+    --color-muted: #555;
+  }
+  figure {
+    break-inside: avoid;
+  }
+}
