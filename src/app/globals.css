@@ -1,0 +1,280 @@
+@import "tailwindcss";
+
+/* ---------- design tokens: única fonte de cor, raio e espaço ---------- */
+:root {
+  --bg: #09090b;
+  --surface: #111113;
+  --surface-2: #18181b;
+  --border: rgba(255, 255, 255, 0.08);
+  --border-strong: rgba(255, 255, 255, 0.16);
+  --text: #fafafa;
+  --text-muted: #a1a1aa;
+  --accent: #4ade80;
+  --accent-ink: #09090b;
+  --warn: #f59e0b;
+  --danger: #f87171;
+
+  --radius-card: 16px;
+  --radius-control: 10px;
+
+  --sidebar-w: 240px;
+  --content-max: 1200px;
+}
+
+@theme inline {
+  --color-bg: var(--bg);
+  --color-surface: var(--surface);
+  --color-surface-2: var(--surface-2);
+  --color-line: var(--border);
+  --color-line-strong: var(--border-strong);
+  --color-fg: var(--text);
+  --color-muted: var(--text-muted);
+  --color-accent: var(--accent);
+  --color-accent-ink: var(--accent-ink);
+  --color-warn: var(--warn);
+  --color-danger: var(--danger);
+
+  --radius-card: var(--radius-card);
+  --radius-control: var(--radius-control);
+
+  --font-sans: var(--font-geist-sans), ui-sans-serif, system-ui, sans-serif;
+  --font-mono: var(--font-geist-mono), ui-monospace, monospace;
+  --font-serif: "Poppins", var(--font-geist-sans), ui-sans-serif, sans-serif;
+}
+
+@property --angle {
+  syntax: "<angle>";
+  initial-value: 0deg;
+  inherits: false;
+}
+
+html {
+  color-scheme: dark;
+}
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+}
+
+::selection {
+  background: color-mix(in oklab, var(--accent) 28%, transparent);
+}
+
+input[type="date"] {
+  color-scheme: dark;
+}
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+/* ---------- tipografia: serifada só em título de página e números grandes ---------- */
+.font-serif,
+.font-display {
+  font-family: "Poppins", var(--font-geist-sans), ui-sans-serif, sans-serif;
+  font-weight: 400;
+  letter-spacing: -0.035em;
+}
+.text-page-title {
+  font-family: "Poppins", var(--font-geist-sans), ui-sans-serif, sans-serif;
+  font-weight: 400;
+  font-size: 40px;
+  line-height: 1.05;
+  letter-spacing: -0.035em;
+}
+.text-stat {
+  font-family: "Poppins", var(--font-geist-sans), ui-sans-serif, sans-serif;
+  font-weight: 400;
+  font-size: 48px;
+  line-height: 1;
+  letter-spacing: -0.035em;
+  font-variant-numeric: tabular-nums;
+}
+
+/* ---------- componentes base ---------- */
+.card {
+  position: relative;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-card);
+  transition: transform 0.25s ease, border-color 0.25s ease;
+}
+.card-hover:hover {
+  transform: translateY(-2px);
+  border-color: var(--border-strong);
+}
+
+.btn {
+  display: inline-flex;
+  height: 40px;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 0 16px;
+  border-radius: var(--radius-control);
+  font-size: 14px;
+  font-weight: 500;
+  white-space: nowrap;
+  transition: background 0.2s, border-color 0.2s, box-shadow 0.3s, transform 0.15s, filter 0.2s;
+}
+.btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+.btn-primary {
+  background: var(--accent);
+  color: var(--accent-ink);
+  box-shadow: 0 0 24px -6px color-mix(in oklab, var(--accent) 70%, transparent);
+}
+.btn-primary:hover:not(:disabled) {
+  filter: brightness(1.06);
+  box-shadow: 0 0 36px -4px color-mix(in oklab, var(--accent) 80%, transparent);
+}
+.btn-primary:active:not(:disabled) {
+  transform: scale(0.98);
+}
+.btn-ghost {
+  border: 1px solid var(--border);
+  color: var(--text);
+  background: transparent;
+}
+.btn-ghost:hover:not(:disabled) {
+  background: var(--surface-2);
+  border-color: var(--border-strong);
+}
+
+.input {
+  height: 40px;
+  width: 100%;
+  border-radius: var(--radius-control);
+  border: 1px solid var(--border);
+  background: var(--surface-2);
+  padding: 0 12px;
+  font-size: 14px;
+  color: var(--text);
+  outline: none;
+  transition: border-color 0.2s, box-shadow 0.3s;
+}
+.input::placeholder {
+  color: var(--text-muted);
+}
+.input:focus {
+  border-color: color-mix(in oklab, var(--accent) 60%, transparent);
+  box-shadow: 0 0 0 3px color-mix(in oklab, var(--accent) 14%, transparent);
+}
+
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  height: 22px;
+  padding: 0 8px;
+  border-radius: 6px;
+  font-size: 12px;
+  font-weight: 500;
+  background: var(--surface-2);
+  color: var(--text-muted);
+}
+
+/* ---------- campo de URL do hero (borda em gradiente verde no foco) ---------- */
+.url-shell {
+  background: var(--border);
+  padding: 1px;
+  border-radius: var(--radius-card);
+  transition: box-shadow 0.4s;
+}
+.url-shell:focus-within {
+  background: conic-gradient(from var(--angle), var(--accent), #166534, var(--accent), #166534, var(--accent));
+  animation: spin-angle 4s linear infinite;
+  box-shadow: 0 0 56px -16px color-mix(in oklab, var(--accent) 60%, transparent);
+}
+@keyframes spin-angle {
+  to {
+    --angle: 360deg;
+  }
+}
+
+/* ---------- compat: classes antigas, já com a superfície única ---------- */
+.glass {
+  position: relative;
+  border-radius: var(--radius-card);
+  border: 1px solid var(--border);
+  background: var(--surface);
+}
+.btn-glow {
+  box-shadow: 0 0 24px -6px color-mix(in oklab, var(--accent) 70%, transparent);
+  transition: box-shadow 0.3s, transform 0.15s, filter 0.2s;
+}
+.btn-glow:hover:not(:disabled) {
+  box-shadow: 0 0 36px -4px color-mix(in oklab, var(--accent) 80%, transparent);
+  filter: brightness(1.06);
+}
+.btn-glow:active:not(:disabled) {
+  transform: scale(0.98);
+}
+.test-card {
+  --mx: 50%;
+  --my: 0%;
+  position: relative;
+  border: 1px solid var(--border);
+  transition: border-color 0.25s, transform 0.25s;
+}
+.test-card:hover {
+  transform: translateY(-2px);
+  border-color: var(--border-strong);
+}
+.text-glow {
+  text-shadow: none;
+}
+.stripe-lime {
+  background: var(--accent);
+}
+.stripe-soft,
+.stripe-dark {
+  background: color-mix(in oklab, var(--text) 5%, transparent);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .url-shell:focus-within {
+    animation: none;
+  }
+  .card,
+  .btn,
+  .test-card {
+    transition: none;
+  }
+}
+
+@media print {
+  body {
+    background: #fff;
+    color: #111;
+  }
+  * {
+    border-color: #ddd !important;
+    --surface: #fff;
+    --surface-2: #f5f5f5;
+    --text: #111;
+    --text-muted: #555;
+  }
+  figure {
+    break-inside: avoid;
+  }
+}
+
+/* brilho sutil que segue o cursor no hero (posição e opacidade vêm do AppMotion) */
+.hero-glow {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: var(--glow, 0);
+  transition: opacity 0.4s;
+  background: radial-gradient(420px circle at var(--mx, 50%) var(--my, 0%), color-mix(in oklab, var(--accent) 9%, transparent), transparent 70%);
+}
+@media (prefers-reduced-motion: reduce) {
+  .hero-glow {
+    display: none;
+  }
+}
