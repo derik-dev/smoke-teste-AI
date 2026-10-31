@@ -90,7 +90,7 @@ export function Workspace({ items, onlyDone = false }: { items: TestItem[]; only
       <div data-reveal className="card overflow-hidden px-4 py-10 sm:px-8 sm:py-14">
         <EmptyPreview />
         <div className="mt-8 flex justify-center">
-          <Link href="/dashboard#novo" className="btn btn-primary">
+          <Link href="/tests/new" className="btn btn-primary">
             Rodar meu primeiro teste
           </Link>
         </div>

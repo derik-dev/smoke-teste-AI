@@ -30,7 +30,7 @@ export function PageHeader({
       <h1 className="text-page-title">{title}</h1>
       {actions && (
         <div className="ml-auto">
-          <Link href="/dashboard#novo" className="btn btn-primary">
+          <Link href="/tests/new" className="btn btn-primary">
             <Plus className="size-4" />
             <span className="hidden sm:inline">Novo teste</span>
           </Link>

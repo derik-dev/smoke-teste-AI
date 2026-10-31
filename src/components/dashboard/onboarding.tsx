@@ -10,7 +10,7 @@ export function onboardingComplete(flags: Flags) {
 export function Onboarding({ flags, className = "" }: { flags: Flags; className?: string }) {
   const steps = [
     { label: "Criar sua conta", hint: "Feito. Bem-vindo!", done: flags.account, href: "/dashboard" },
-    { label: "Rodar o primeiro teste", hint: "Cole uma URL no campo acima.", done: flags.firstTest, href: "/dashboard#novo" },
+    { label: "Rodar o primeiro teste", hint: "Cole a URL do seu site e rode o teste.", done: flags.firstTest, href: "/tests/new" },
     { label: "Abrir um relatório completo", hint: "Veja nota, problemas e prints.", done: flags.openedReport, href: "/reports" },
     { label: "Compartilhar com um cliente", hint: "Copie o link público do relatório.", done: flags.shared, href: "/reports" },
   ];

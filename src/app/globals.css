@@ -278,3 +278,9 @@ input[type="date"] {
     display: none;
   }
 }
+
+.screen-in { animation: screen-in .45s cubic-bezier(.22,1,.36,1) both; }
+@keyframes screen-in { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
+@media (prefers-reduced-motion: reduce) {
+  .screen-in { animation: none; }
+}
